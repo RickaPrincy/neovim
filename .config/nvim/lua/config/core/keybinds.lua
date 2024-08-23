@@ -23,7 +23,10 @@ vim.api.nvim_set_keymap('n', '<C-Left>', [[:lua require('config.core.utils').win
 vim.api.nvim_set_keymap('n', '<C-Right>', [[:lua require('config.core.utils').window.resize("right")<cr>]],
   { noremap = true, silent = true })
 
--- which-key normal mode
+vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, noremap = true })
+vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', { expr = true, noremap = true })
+
+-- which-key
 local wk = require("which-key")
 wk.add({
   -- editor
@@ -43,14 +46,14 @@ wk.add({
   { "<leader>ff",  "<cmd>Telescope find_files<cr>",                       desc = "Find File",                mode = "n" },
   { "<leader>ft",  "<cmd>Telescope live_grep<cr>",                        desc = "Live grep",                mode = "n" },
 
-  -- bufferline 
+  -- bufferline
   { "<leader>b",   group = "Buffer" }, -- group
-  { "<leader>bl",  "<cmd>BufferLineCloseLeft<cr>",                       desc = "Close left",                mode = "n" },
-  { "<leader>bh",  "<cmd>BufferLineCloseRight<cr>",                       desc = "Close right",                mode = "n" },
-  { "<leader>bo",  "<cmd>BufferLineCloseOthers<cr>",                       desc = "Close others",                mode = "n" },
-  { "<leader>bn",  "<cmd>BufferLineCycleNext<cr>",                       desc = "Next buffer",                mode = "n" },
-  { "<leader>bb",  "<cmd>BufferLineCyclePrev<cr>",                       desc = "Previous buffer",                mode = "n" },
-  { "<leader>bc",  "<cmd>:bdelete<cr>",                       desc = "Close current",                mode = "n" },
+  { "<leader>bl",  "<cmd>BufferLineCloseLeft<cr>",                        desc = "Close left",               mode = "n" },
+  { "<leader>bh",  "<cmd>BufferLineCloseRight<cr>",                       desc = "Close right",              mode = "n" },
+  { "<leader>bo",  "<cmd>BufferLineCloseOthers<cr>",                      desc = "Close others",             mode = "n" },
+  { "<leader>bn",  "<cmd>BufferLineCycleNext<cr>",                        desc = "Next buffer",              mode = "n" },
+  { "<leader>bb",  "<cmd>BufferLineCyclePrev<cr>",                        desc = "Previous buffer",          mode = "n" },
+  { "<leader>bc",  "<cmd>:bdelete<cr>",                                   desc = "Close current",            mode = "n" },
 
   -- terminal
   { "<leader>t",   group = "Terminal" },     -- group
@@ -62,7 +65,15 @@ wk.add({
   { "<leader>tnv", function() utils.toggleterm.open_new_vertical() end,   desc = "New Split vertical",       mode = "n" },
   { "<leader>tnh", function() utils.toggleterm.open_new_horizontal() end, desc = "New Split horizontal",     mode = "n" },
 
-  -- lsp 
+  -- lsp
   { "<leader>l",   group = "Lsp" }, -- group
-  { "<leader>lf",  "<cmd>LspZeroFormat<cr>",                       desc = "Format document",                mode = "n" },
+  { "<leader>lf",  "<cmd>LspZeroFormat<cr>",                              desc = "Format document",          mode = "n" },
+  { "<leader>la",  "<cmd>lua vim.lsp.buf.code_action()<cr>",              desc = "Code actions",             mode = "n" },
+  { "<leader>ld",  "<cmd>lua vim.lsp.buf.definition()<cr>",               desc = "Go to definition",         mode = "n" },
+  { "<leader>lD",  "<cmd>lua vim.lsp.buf.declaration()<cr>",              desc = "Go to declaration",        mode = "n" },
+  { "<leader>li",  "<cmd>lua vim.lsp.buf.implementation()<cr>",           desc = "Go to implementation",     mode = "n" },
+  { "<leader>lo",  "<cmd>lua vim.lsp.buf.type_definition()<cr>",          desc = "Go to type definition",    mode = "n" },
+  { "<leader>lr",  "<cmd>lua vim.lsp.buf.references()<cr>",               desc = "Go to references",         mode = "n" },
+  { "<leader>ls",  "<cmd>lua vim.lsp.buf.signature_help()<cr>",           desc = "Signature help",           mode = "n" },
+  { "<leader>lR",  "<cmd>lua vim.lsp.buf.rename()<cr>",                   desc = "Rename symbol",            mode = "n" },
 })
