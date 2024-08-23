@@ -5,9 +5,6 @@ return {
   -- colorizer
   { "norcalli/nvim-colorizer.lua" },
 
-  -- mason
-  { "williamboman/mason.nvim" },
-
   -- file explorer
   { 'nvim-tree/nvim-tree.lua' },
 
@@ -67,7 +64,7 @@ return {
       })
     end
   },
-  { "neovim/nvim-lspconfig" },
+  -- autopairs
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -75,19 +72,12 @@ return {
     -- use opts = {} for passing setup options
     -- this is equivalent to setup({}) function
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    cmd = { "LspInstall", "LspUninstall" },
-    config = function()
-      require("mason-lspconfig").setup(lvim.lsp.installer.setup)
 
-      -- automatic_installation is handled by lsp-manager
-      local settings = require "mason-lspconfig.settings"
-      settings.current.automatic_installation = false
-    end,
-    lazy = true,
-    event = "User FileOpened",
-    dependencies = "mason.nvim",
-  },
-  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
+  -- lsp
+  {'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
+  {'neovim/nvim-lspconfig'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'hrsh7th/nvim-cmp'},
 }

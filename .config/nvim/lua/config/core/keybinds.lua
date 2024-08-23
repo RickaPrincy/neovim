@@ -23,7 +23,7 @@ vim.api.nvim_set_keymap('n', '<C-Left>', [[:lua require('config.core.utils').win
 vim.api.nvim_set_keymap('n', '<C-Right>', [[:lua require('config.core.utils').window.resize("right")<cr>]],
   { noremap = true, silent = true })
 
--- whick-key normal mode
+-- which-key normal mode
 local wk = require("which-key")
 wk.add({
   -- editor
@@ -61,4 +61,8 @@ wk.add({
   { "<leader>tnf", function() utils.toggleterm.open_new_float() end,      desc = "New Split float",          mode = "n" },
   { "<leader>tnv", function() utils.toggleterm.open_new_vertical() end,   desc = "New Split vertical",       mode = "n" },
   { "<leader>tnh", function() utils.toggleterm.open_new_horizontal() end, desc = "New Split horizontal",     mode = "n" },
+
+  -- lsp 
+  { "<leader>l",   group = "Lsp" }, -- group
+  { "<leader>lf",  "<cmd>LspZeroFormat<cr>",                       desc = "Format document",                mode = "n" },
 })
