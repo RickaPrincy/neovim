@@ -73,6 +73,13 @@ return {
     -- this is equivalent to setup({}) function
   },
 
+  -- dashboard
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+  },
+
   -- lsp & mason & cmp
   { "VonHeikemen/lsp-zero.nvim",        branch = "v4.x" },
   { "williamboman/mason.nvim" },
