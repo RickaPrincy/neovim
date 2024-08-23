@@ -1,18 +1,18 @@
 return {
   -- colorscheme
   { "Mofiqul/vscode.nvim" },
-	
-	-- colorizer
-	{ "norcalli/nvim-colorizer.lua" },
-	
-	-- mason
-	{ "williamboman/mason.nvim" },
+
+  -- colorizer
+  { "norcalli/nvim-colorizer.lua" },
+
+  -- mason
+  { "williamboman/mason.nvim" },
 
   -- file explorer
   { 'nvim-tree/nvim-tree.lua' },
 
   -- terminal
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+  { 'akinsho/toggleterm.nvim',    version = "*", config = true },
 
   -- telescope
   {
@@ -53,7 +53,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", },
     keys = {}
   },
-	-- nvim-treesitter
+  -- nvim-treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -67,5 +67,27 @@ return {
       })
     end
   },
-	{ "neovim/nvim-lspconfig" }
+  { "neovim/nvim-lspconfig" },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    cmd = { "LspInstall", "LspUninstall" },
+    config = function()
+      require("mason-lspconfig").setup(lvim.lsp.installer.setup)
+
+      -- automatic_installation is handled by lsp-manager
+      local settings = require "mason-lspconfig.settings"
+      settings.current.automatic_installation = false
+    end,
+    lazy = true,
+    event = "User FileOpened",
+    dependencies = "mason.nvim",
+  },
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
 }
